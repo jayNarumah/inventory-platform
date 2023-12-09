@@ -5,7 +5,7 @@ import { PrimeNGConfig } from 'primeng/api';
 // import { AppState } from './store/app.state';
 
 @Component({
-  selector: 'store-platform-root',
+  selector: 'inventory-platform-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
