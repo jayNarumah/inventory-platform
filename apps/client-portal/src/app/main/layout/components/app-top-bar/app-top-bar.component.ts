@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
+import { Store } from '@ngrx/store';
 import { AppLayoutService } from '../../services/app-layout.service';
 import { AppLoadingService } from 'apps/client-portal/src/app/store/services/app-loading.service';
 import { AuthService } from '../../../auth/services/auth.service';
@@ -31,7 +32,7 @@ export class AppTopBarComponent implements OnInit {
 
   constructor(
     public layoutService: AppLayoutService,
-    // private readonly appStore: Store<AppState>,
+    private readonly appStore: Store<AppState>,
     private readonly router: Router,
     private readonly authService: AuthService,
     private readonly appLoadingService: AppLoadingService
@@ -40,15 +41,15 @@ export class AppTopBarComponent implements OnInit {
   ngOnInit() {
     this.notificationItems = [
       {
-        label: 'Procurement Plan Published for Approval 1',
+        label: 'Notification 1',
         routerLink: '/notification/notifications',
       },
       {
-        label: 'Procurement Plan Published for Approval 2',
+        label: 'Notification 2',
         routerLink: '/notification/notifications',
       },
       {
-        label: 'Procurement Plan Published for Approval 3',
+        label: 'Notification 3',
         routerLink: '/notification/notifications',
       },
     ];
@@ -60,9 +61,8 @@ export class AppTopBarComponent implements OnInit {
           {
             label: 'My Profile',
             icon: 'pi pi-user',
-            visible: this.isClientBureau,
             command: () => {
-              this.goToProfileBureau();
+              this.goToProfile();
             },
           },
           {
@@ -86,16 +86,16 @@ export class AppTopBarComponent implements OnInit {
   }
 
   logout() {
-    // this.appStore.dispatch(AppAuthActions.logout())
-    this.router.navigate(['/auth/budgeting/login']);
+    this.appStore.dispatch(AppAuthActions.logout())
+    this.router.navigate(['/auth/login']);
   }
 
 
   onNotificationSelect(event: any) {
-    // this.router.navigate(['/module/procurement/procurements/list']);
+    this.router.navigate(['']);
   }
 
-  goToProfileBureau() {
+  goToProfile() {
     let userUid: string;
 
     // this.authService.user$.subscribe(user => {
