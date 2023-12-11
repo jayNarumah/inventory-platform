@@ -1,5 +1,4 @@
-import { ArrayMaxSize, ArrayMinSize, IsArray, IsBoolean, IsEmail, IsNotEmpty, IsString, MinLength, isEmail } from "class-validator";
-
+import { ArrayMinSize, IsArray, IsBoolean, IsEmail, IsNotEmpty, IsString, MinLength, isEmail } from "class-validator";
 export class AuthLoginRequestDto {
   @IsNotEmpty()
   username!: string;
