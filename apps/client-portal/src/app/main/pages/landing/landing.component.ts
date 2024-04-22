@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 
 @Component({
-  selector: 'monita-platform-landing',
+  selector: 'client-portal-landing',
   templateUrl: './landing.component.html',
   styleUrls: ['./landing.component.scss'],
 })
 export class LandingComponent implements OnInit {
 
   items: MenuItem[] = [];
-  constructor() {}
+  constructor() { }
 
   ngOnInit(): void {
     this.items = [

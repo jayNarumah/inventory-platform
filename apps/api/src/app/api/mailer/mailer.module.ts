@@ -27,7 +27,7 @@ import { PrismaClient } from '@prisma/client';
           from: '"KASUWA" <no-reply@kasuwa.com>',
         },
         template: {
-          dir: join(__dirname, 'kasuwa-mail-template'),
+          dir: join(__dirname, 'email-templates'),
           adapter: new HandlebarsAdapter(),
           options: {
             strict: true,

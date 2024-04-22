@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ForgotPasswordDto } from '@monita-platform/api-interfaces';
-import { AuthEndpoint } from '@monita-platform/client-budgeting/api/endpoints/auth.endpoint';
-import { AppNotificationService } from '@monita-platform/client-budgeting/store/services/app-notification.service';
+import { ForgotPasswordDto } from '@inventory-platform/api-interfaces';
+import { AppNotificationService } from 'apps/client-portal/src/app/store/services/app-notification.service';
 
 @Component({
   templateUrl: './forgot-password-page.component.html',
@@ -17,7 +16,7 @@ export class ForgotPasswordPageComponent implements OnInit {
 
   constructor(
     private readonly fb: FormBuilder,
-    private readonly authEndpoint: AuthEndpoint,
+    // private readonly authEndpoint: AuthEndpoint,
     private readonly appNotificationService: AppNotificationService,
   ) { }
 
@@ -27,25 +26,25 @@ export class ForgotPasswordPageComponent implements OnInit {
     const payload: ForgotPasswordDto = {
       email: this.resetForm.controls["username"].value
     }
-    this.authEndpoint.forgotPassword(payload).subscribe({
-      next: () => {
-        console.log('DONE')
-        this.email = payload.email
-        this.sent = true
-        this.appNotificationService.showSuccess({
-          title: "Email Sent",
-          detail: `check ${this.email}`,
-        });
-      },
-      error: () => {
-        this.email = payload.email
-        this.sent = true;
-        this.appNotificationService.showSuccess({
-          title: "Email Sent",
-          detail: `check ${this.email}`,
-        });
-      }
-    });
+    // this.authEndpoint.forgotPassword(payload).subscribe({
+    //   next: () => {
+    //     console.log('DONE')
+    //     this.email = payload.email
+    //     this.sent = true
+    //     this.appNotificationService.showSuccess({
+    //       title: "Email Sent",
+    //       detail: `check ${this.email}`,
+    //     });
+    //   },
+    //   error: () => {
+    //     this.email = payload.email
+    //     this.sent = true;
+    //     this.appNotificationService.showSuccess({
+    //       title: "Email Sent",
+    //       detail: `check ${this.email}`,
+    //     });
+    //   }
+    // });
 
   }
 }

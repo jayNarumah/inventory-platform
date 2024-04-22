@@ -41,21 +41,6 @@ export class MailService {
     return 'success'
   };
 
-  async sendProcurementMail(payload: SendProcurementMailDto) {
-    payload.recipients.forEach(async (recipient) => {
-      await this.mailerService.sendMail({
-        to: recipient.email_address,
-        from: this.config.get('MAILER_USER'),
-        subject: payload.subject,
-        template: 'procurement-template',
-        context: {
-          payload: payload
-        }
-      })
-    });
-    return "success"
-  }
-
   async sendDefaultMail(payload: SendProcurementMailDto) {
     payload.recipients.forEach(async (recipient) => {
       await this.mailerService.sendMail({

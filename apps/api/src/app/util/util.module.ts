@@ -7,17 +7,17 @@ import { ImageUtilService } from "./image/util.imageurl.service";
 import { UidService } from "./uid/uid.service";
 
 const providers = [
-    BcryptService,
-    OtpGeneratorService,
-    AwsFileService,
-    ImageUtilService,
-    UidService,
+  BcryptService,
+  OtpGeneratorService,
+  // AwsFileService,
+  ImageUtilService,
+  UidService,
 ];
 
 @Global()
 @Module({
-    imports: [HttpModule],
-    providers: [...providers],
-    exports: [...providers],
+  imports: [HttpModule],
+  providers: [...providers],
+  exports: [...providers],
 })
 export class UtilModule { }

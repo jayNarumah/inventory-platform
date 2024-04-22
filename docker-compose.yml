@@ -1,0 +1,5 @@
+services:
+  inventory_portal:
+    build: .
+    ports:
+      - 4200

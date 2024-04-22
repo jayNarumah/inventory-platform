@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'monita-platform-access-denied',
+  selector: 'client-portal-access-denied',
   templateUrl: './access-denied.component.html',
   styleUrls: ['./access-denied.component.scss'],
 })
 export class AccessDeniedComponent implements OnInit {
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
   goBack() {
     window.history.back();
   }
