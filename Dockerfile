@@ -3,7 +3,7 @@ WORKDIR /app
 COPY . .
 COPY package*.json ./
 RUN npm install
-RUN npm run build
+RUN npm run build client-portal
 EXPOSE 4200
 CMD [ "sh", "-c", "nx run client-portal:serve && nx run api:serve" ]
 # CMD [ "npm", "nx", "run", "client-portal:serve" ]
