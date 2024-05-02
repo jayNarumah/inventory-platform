@@ -6,9 +6,9 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 // import { config } from 'aws-sdk';
 import { join } from 'path';
 import { AppModule } from './app/app.module';
-import { PrismaService } from './app/prisma/prisma.service';
 import { HttpExceptionFilter } from './app/api/exception-filter/http-exception.filter';
 import { PrismaExceptionFilter } from './app/api/exception-filter/prisma-exception.filter';
+import { PrismaService } from './app/database/prisma.service';
 
 async function bootstrap() {
   // let httpsOptions = {};
@@ -55,7 +55,7 @@ async function bootstrap() {
 
   // Register Prisma Shutdown Hooks
   const prisma = app.get(PrismaService);
-  await prisma.enableShutdownHooks(app);
+  // await prisma.enableShutdownHooks(app);
 
   // Set Global Interceptors
   // app.useGlobalInterceptors(new RequestBodyLoggerInterceptor());

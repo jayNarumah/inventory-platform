@@ -11,7 +11,70 @@ datasource db {
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+  id               Int        @id @default(autoincrement())
+  uid              String     @unique @default(cuid())
+  full_name        String     @db.VarChar(100)
+  email_address    String     @unique @db.VarChar(200)
+  password         String     @db.VarChar(4096)
+  gender           String     @db.VarChar(30)
+  dob              DateTime   @db.Date()
+  created_at       DateTime   @default(now())
+  last_modified_at DateTime   @updatedAt
+  userRole         UserRole[]
+}
+
+model UserAccessToken {
+  id                 Int      @id @default(autoincrement())
+  uid                String   @unique @default(cuid())
+  access_token       String   @db.VarChar(100)
+  expires_in_minutes Int
+  created_at         DateTime @default(now())
+  // relations
+  user_uid           String // User.uid
+}
+
+model Role {
+  id               Int              @id @default(autoincrement())
+  uid              String           @unique @default(cuid())
+  title            String           @db.VarChar(200)
+  description      String           @unique @db.VarChar(300)
+  created_at       DateTime         @default(now())
+  last_modified_at DateTime         @updatedAt
+  //relations
+  userRoles        UserRole[]
+  rolePermissions  RolePermission[]
+}
+
+model Permission {
+  id               Int              @id @default(autoincrement())
+  uid              String           @unique @default(cuid())
+  title            String           @db.VarChar(200)
+  description      String           @unique @db.VarChar(300)
+  created_at       DateTime         @default(now())
+  last_modified_at DateTime         @updatedAt
+  user_id          Int
+  //relations
+  RolePermission   RolePermission[]
+}
+
+model UserRole {
+  id      Int    @id @default(autoincrement())
+  uid     String @unique @default(cuid())
+  user_id String
+  role_id String
+
+  //relations
+  user User @relation(fields: [user_id], references: [uid])
+  role Role @relation(fields: [role_id], references: [uid])
+}
+
+model RolePermission {
+  id             Int    @id @default(autoincrement())
+  uid            String @unique @default(cuid())
+  role_uid       String
+  permission_uid String
+
+  //relationship
+  role       Role       @relation(fields: [role_uid], references: [uid])
+  permission Permission @relation(fields: [permission_uid], references: [uid])
 }

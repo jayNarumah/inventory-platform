@@ -4,16 +4,16 @@ import { ApiModule } from './api/api.module';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { DatabaseModule } from './database/database.module';
-import { PrismaModule } from './prisma/prisma.module';
 import { UtilModule } from './util/util.module';
+import { DomainModule } from '../domain/domain.module';
+import { PrismaModule } from './database/prisma.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     PrismaModule,
     UtilModule,
-    DatabaseModule,
+    DomainModule,
     ApiModule
   ],
   controllers: [AppController],

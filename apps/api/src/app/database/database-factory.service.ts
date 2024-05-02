@@ -1,24 +1,23 @@
 import { Injectable } from '@nestjs/common';
+import { AbstractSeeder } from './seeders/seeder';
+import { UserSeeder } from './seeders/user.seeder';
 
 @Injectable()
 export class DatabaseFactoryService {
   private seeders: AbstractSeeder[] = [];
 
   constructor(
-    // private readonly currencySeeder: CurrencySeeder,
+    private readonly userSeeder: UserSeeder,
   ) {
     this._registerSeeders();
-    this._runSeeders();
   }
 
   private _registerSeeders() {
-    const seeders: AbstractSeeder[] = [
-      // this.currencySeeder,
-    ];
+    const seeders = [this.userSeeder];
     this.seeders.push(...seeders);
   }
 
-  private async _runSeeders() {
+  async runSeeders() {
     this.seeders.map(async (seeder) => {
       await seeder.run();
     });

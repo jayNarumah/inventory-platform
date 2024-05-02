@@ -1,113 +1,108 @@
 import { ArrayMinSize, IsArray, IsBoolean, IsEmail, IsNotEmpty, IsString, MinLength } from "class-validator";
 export class AuthLoginRequestDto {
-  @IsNotEmpty()
+  // @IsNotEmpty()
   username!: string;
 
-  @IsNotEmpty()
-  @MinLength(8)
+  // @IsNotEmpty()
+  // @MinLength(8)
   password!: string;
 }
 
 export interface AuthLoginResponseDto {
   access_token: string;
-  must_change_password: boolean;
+  // must_change_password: boolean;
   user: AuthLoggedInUserDto;
 }
 
 export interface AuthLoggedInUserDto {
   id?: number;
   uid: string;
-  staff_code: string;
   full_name: string;
-  mda?: {
-    id: number;
-    name: string;
-  };
-  permissions: string[];
+  email_address: string;
 }
 
 // User Roles
 
 export class CreateMdaUserSecurityGroupDto {
-  @IsNotEmpty()
-  @MinLength(3)
+  // @IsNotEmpty()
+  // @MinLength(3)
   name!: string;
 }
 
 export class UpdateMdaUserSecurityGroupDto {
-  @IsNotEmpty()
-  @MinLength(3)
+  // @IsNotEmpty()
+  // @MinLength(3)
   name!: string;
 }
 
 export class SetPermissionsOnMdaUserSecurityGroupDto {
-  @IsArray()
-  @ArrayMinSize(1)
-  @IsNotEmpty({ each: true })
+  // @IsArray()
+  // @ArrayMinSize(1)
+  // @IsNotEmpty({ each: true })
   permission_uids!: string[];
 }
 
 export class ResetPasswordDto {
-  @IsNotEmpty()
-  @IsString()
+  // @IsNotEmpty()
+  // @IsString()
   uid?: string
 }
 
 export class UpdateMdaUserActivationStatusDto {
-  @IsNotEmpty()
-  @IsString()
+  // @IsNotEmpty()
+  // @IsString()
   user_uid!: string
 
-  @IsBoolean()
-  @IsNotEmpty()
+  // @IsBoolean()
+  // @IsNotEmpty()
   is_active!: boolean
 }
 
 export class AssignMdaUserToUserOrganisationUnitDto {
-  @IsNotEmpty()
+  // @IsNotEmpty()
   organisation_unit_uid!: string;
 
-  @IsNotEmpty()
+  // @IsNotEmpty()
   user_uid!: string;
 }
 
 export class RemoveMdaUserFromUserOrganisationUnitDto {
-  @IsNotEmpty()
+  // @IsNotEmpty()
   organisation_unit_uid!: string;
 
-  @IsNotEmpty()
+  // @IsNotEmpty()
   user_uid!: string;
 }
 
 export class UpdatePasswordDto {
-  @IsNotEmpty()
-  @IsString()
+  // @IsNotEmpty()
+  // @IsString()
   password!: string;
 
-  @IsBoolean()
+  // @IsBoolean()
   must_change_password!: false;
 }
 
 export class ForgotPasswordDto {
-  @IsNotEmpty()
-  @IsString()
+  // @IsNotEmpty()
+  // @IsString()
   email!: string;
 }
 
 export class UpdateProfileDto {
-  @IsEmail()
+  // @IsEmail()
   address?: string;
 
-  @IsString()
+  // @IsString()
   phone?: string
 
-  @IsString()
+  // @IsString()
   site?: string
 
-  @IsString()
+  // @IsString()
   gender?: string
 
-  @IsString()
+  // @IsString()
   birthday?: string;
 
   // @IsArray()

@@ -6,8 +6,8 @@ import { MailController } from './mailer.controller';
 import { MailService } from './mailer.service';
 import { join } from 'path';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { PrismaModule } from '../../prisma/prisma.module';
 import { PrismaClient } from '@prisma/client';
+import { PrismaModule } from '../../database/prisma.module';
 
 @Module({
   imports: [

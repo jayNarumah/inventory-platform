@@ -1,1 +1,1 @@
-export * from './tenant';
+export * as Auth from './user';
