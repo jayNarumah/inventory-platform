@@ -2,7 +2,7 @@
 <p-dialog [(visible)]="visible" [modal]="true" [style]="{ width: '20vw' }" [draggable]="false" [resizable]="false"
   [closable]="false">
   <div class="prompt">
-    <div *ngIf="message?.status">
+    <!-- <div *ngIf="message?.status">
       <div style="text-align: center;">
         <svg class='report' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="96"
           height="96" viewBox="0 0 96 96">
@@ -25,7 +25,7 @@
       <div style="text-align: center;">
         <h5>{{message?.message}}</h5>
       </div>
-    </div>
+    </div> -->
 
     <div *ngIf="!message?.status">
       <div style="text-align: center;">
@@ -63,22 +63,21 @@
   </div>
 </div>
 
-<div
-  class="surface-card flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden roboto-font">
+<div  class="surface-card flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden roboto-font">
   <div class="grid justify-content-center p-2 lg:p-0" style="min-width: 60%" *ngIf="login">
     <div class="surface-card w-full lg:w-5 pt-8">
       <div class="text-left mb-5">
-        <label for="password1" class="block text-900 font-medium">Welcome back</label>
+        <label for="password1" class="block text-900 font-medium">Welcome Back</label>
         <div class="text-900 text-4xl font-medium">
           <span class="black-font"><strong>Login to your account</strong></span>
         </div>
-
+<!-- 
         <div *ngIf="declined" class="alert alert-danger" role="alert">
           <p-messages [(value)]="msg" [enableService]="false"></p-messages>
-        </div>
+        </div> -->
       </div>
 
-
+<!-- login form -->
       <form class="" [formGroup]="loginForm">
         <div>
           <label for="email1" class="block text-900 font-medium mb-2">Email</label>
@@ -99,8 +98,8 @@
                 password?</strong></a>
           </div>
 
-          <button (click)="doLogin()" pButton pRipple label="Login now"
-            class="w-full mb-3 green-white-btn p-button-primary"></button>
+          <button pButton pRipple label="Login Now"
+            class="w-full mb-3 green-white-btn " style="background-color: #279acf;"></button>
         </div>
       </form>
     </div>

@@ -10,11 +10,11 @@ export const platformGenders = [
     }
 ];
 
-export const platformStudentGuardianTypes = [
-    {
-        "name": "Parent"
-    },
-    {
-        "name": "Guardian"
-    },
-];
+// export const platformStudentGuardianTypes = [
+//     {
+//         "name": "Parent"
+//     },
+//     {
+//         "name": "Guardian"
+//     },
+// ];

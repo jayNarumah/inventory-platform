@@ -29,7 +29,7 @@ export const authSelectUser = createSelector(
   (state: AppAuthState) => state.user
 );
 
-export const authSelectAssignedPermissions = createSelector(
-  authSelect,
-  (state: AppAuthState) => state.user?.permissions ?? []
-);
+// export const authSelectAssignedPermissions = createSelector(
+//   authSelect,
+//   (state: AppAuthState) => state.user?.permissions ?? []
+// );

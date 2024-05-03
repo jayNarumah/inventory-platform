@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UiModule } from '@inventory-platform/ui';
 import { CommonModule } from '@angular/common';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { ForgotPasswordPageComponent } from './pages/forgot-password-page/forgot-password-page.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,7 @@ const routes: Routes = [
     component: AuthLayoutComponent,
     children: [
       { path: 'login', component: LoginPageComponent },
+      { path: 'forgot-password', component: ForgotPasswordPageComponent },
       { path: '', redirectTo: 'login', pathMatch: 'prefix' },
     ],
   },
