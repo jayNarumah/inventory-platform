@@ -23,15 +23,25 @@ export class UserSeeder implements AbstractSeeder {
     if (userCount > 0) return;
 
     const hashedPassword = await this.bcryptService.hashPassword('super@321');
-    const sudoAdmin = await this.prisma.user.create({
-      data: {
-        uid: this.uidService.generateUuid(),
-        full_name: 'Super Admin',
-        email_address: 'super@admin.mail.ng',
-        password: hashedPassword,
-        gender: 'Male',
-        dob: new Date(),
-      },
+    const sudoAdmin = await this.prisma.user.createMany({
+      data: [
+        {
+          uid: this.uidService.generateUuid(),
+          full_name: 'Super Admin',
+          email_address: 'super@admin.mail.ng',
+          password: hashedPassword,
+          gender: 'Male',
+          dob: new Date(),
+        },
+        {
+          uid: this.uidService.generateUuid(),
+          full_name: 'Admin User',
+          email_address: 'ahmad@admin.mail.ng',
+          password: hashedPassword,
+          gender: 'Male',
+          dob: new Date(),
+        },
+      ],
     });
   }
 }
