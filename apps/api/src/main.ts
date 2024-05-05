@@ -9,6 +9,7 @@ import { AppModule } from './app/app.module';
 import { HttpExceptionFilter } from './app/api/exception-filter/http-exception.filter';
 import { PrismaExceptionFilter } from './app/api/exception-filter/prisma-exception.filter';
 import { PrismaService } from './app/database/prisma.service';
+import { DatabaseFactoryService } from './app/database/database-factory.service';
 
 async function bootstrap() {
   // let httpsOptions = {};
@@ -70,6 +71,10 @@ async function bootstrap() {
   SwaggerModule.setup('docs', app, document, {
     customSiteTitle: 'Kasuwa API Docs',
   });
+
+  // Seeder
+  const databaseFactory = app.get(DatabaseFactoryService);
+  await databaseFactory.runSeeders();
 
   const port = process.env.PORT || 3333;
   await app.listen(port);

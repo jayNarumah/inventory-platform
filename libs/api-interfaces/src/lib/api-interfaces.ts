@@ -16,5 +16,5 @@ export interface ApiError {
 }
 
 export const NodeEnvironmentParam = {
-  API_URL: "MONITA_API_URL",
+  API_URL: "KASUWA_API_URL",
 };
