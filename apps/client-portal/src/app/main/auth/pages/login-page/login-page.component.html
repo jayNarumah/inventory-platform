@@ -1,8 +1,8 @@
 <!-- reset password confirmation modal-->
-<p-dialog [(visible)]="visible" [modal]="true" [style]="{ width: '20vw' }" [draggable]="false" [resizable]="false"
+<!-- <p-dialog [(visible)]="visible" [modal]="true" [style]="{ width: '20vw' }" [draggable]="false" [resizable]="false"
   [closable]="false">
   <div class="prompt">
-    <!-- <div *ngIf="message?.status">
+     <div *ngIf="message?.status">
       <div style="text-align: center;">
         <svg class='report' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="96"
           height="96" viewBox="0 0 96 96">
@@ -27,7 +27,7 @@
       </div>
     </div> -->
 
-    <div *ngIf="!message?.status">
+    <!-- <div *ngIf="!message?.status">
       <div style="text-align: center;">
         <svg class='report' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
           id="Layer_1" x="0px" y="0px" width="122.88px" height="122.879px" viewBox="0 0 122.88 122.879"
@@ -43,7 +43,7 @@
       </div>
     </div>
   </div>
-</p-dialog>
+</p-dialog>  -->
 
 <div style="margin-bottom: -158px;" class="white-bg justify-content-center overflow-hidden min-w-screen">
   <div class="pt-4 pb-2 px-8 flex align-items-center justify-content-between relative lg:static white-bg">
@@ -51,7 +51,7 @@
       <span class="block text-4xl font-bold mb-1 grey-font">
         <img src="assets\images\logos\Icons\chemistry.png" alt="logo" height="120" class="img-fluid p-5" /></span>
     </a>
-    <a pRipple class="cursor-pointer block lg:hidden text-700" pStyleClass="@next" enterClass="hidden"
+    <a pRipple class="cursor-pointer block lg:hidden text-700" pStyleClass="@next" enterFromClass="hidden"
       leaveToClass="hidden" [hideOnOutsideClick]="true">
       <i class="pi pi-bars text-4xl"></i>
     </a>
@@ -78,15 +78,42 @@
       </div>
 
 <!-- login form -->
-      <form class="" [formGroup]="loginForm">
+      <form class=""  [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <p-messages [value]="msgs"></p-messages>
         <div>
           <label for="email1" class="block text-900 font-medium mb-2">Email</label>
-          <input id="login_username" formControlName="username" placeholder="Login Username" type="text" pInputText
+          <input id="email" formControlName="email" placeholder="Login email" type="email" pInputText
             class="w-full mb-3" />
+            <div
+            *ngIf="
+              loginFormControls['email'].invalid &&
+              loginFormControls['email'].touched
+            "
+            class="text-danger"
+          >
+            <small
+              class="text-red-500"
+              *ngIf="loginFormControls['email'].errors?.['required']"
+              >Email is required!</small
+            >
+          </div>
 
           <label for="password1" class="block text-900 font-medium mb-2">Password</label>
           <input id="login_password" placeholder="Password" formControlName="password" type="password" pInputText
             class="w-full mb-3" />
+            <div
+            *ngIf="
+              loginFormControls['password'].invalid &&
+              loginFormControls['password'].touched
+            "
+            class="text-danger"
+          >
+            <small
+              class="text-red-500"
+              *ngIf="loginFormControls['password'].errors?.['required']"
+              >Password is required!</small
+            >
+          </div>
 
           <div class="flex align-items-center justify-content-between mb-6">
             <div class="flex align-items-center">
@@ -101,22 +128,31 @@
           <button pButton pRipple label="Login Now"
             class="w-full mb-3 green-white-btn " style="background-color: #279acf;"></button>
         </div>
+        <div class="mt-1 text-center">
+          <span class="text-600 font-medium line-height-3"
+            >Don't have an account?</span
+          >
+          <a
+            routerLink="/auth/register"
+            class="font-medium no-underline ml-2 text-primary cursor-pointer"
+            ><strong>Create today!</strong></a
+          >
+        </div>
       </form>
     </div>
   </div>
 
   <!-- reset password form -->
-  <div class="grid justify-content-center p-2 lg:p-0" style="min-width: 60%" *ngIf="must_change_password">
+  <!-- <div class="grid justify-content-center p-2 lg:p-0" style="min-width: 60%" *ngIf="must_change_password">
     <div class="surface-card w-full lg:w-6 pt-8">
       <div class="text-left mb-5">
-        <!-- <label for="password1" class="block text-900 font-medium">Login to your account</label> -->
-        <div class="text-900 text-4xl font-medium">
+         <label for="password1" class="block text-900 font-medium">Login to your account</label>         <div class="text-900 text-4xl font-medium">
           <span class="black-font"><strong>Reset Password</strong></span>
         </div>
 
-        <!-- <div *ngIf="declined" class="alert alert-danger" role="alert">
+        <div *ngIf="declined" class="alert alert-danger" role="alert">
           <p-messages [(value)]="msg" [enableService]="false"></p-messages>
-        </div> -->
+        </div>
       </div>
 
 
@@ -159,24 +195,24 @@
             </small>
           </div>
 
-          <!-- <div class="flex align-items-center justify-content-between mb-6">
+          <div class="flex align-items-center justify-content-between mb-6">
             <div class="flex align-items-center">
               <p-checkbox id="rememberme1" [binary]="true" styleClass="mr-2"></p-checkbox>
               <label for="rememberme1" class="text-900">Remember me</label>
             </div>
             <a class="font-medium no-underline ml-2 grey-font text-right cursor-pointer"><strong>Forgot
                 password?</strong></a>
-          </div> -->
+          </div>
 
           <button (click)="updatePassword()" [disabled]="!reset" pButton pRipple label="update Password"
             class="w-full mb-3 green-white-btn p-button-success"></button>
         </div>
       </form>
     </div>
-  </div>
+  </div> -->
 
   <!-- confirmation page -->
-  <div class="grid justify-content-center p-2 lg:p-0" style="min-width: 60%" *ngIf="complete">
+  <!-- <div class="grid justify-content-center p-2 lg:p-0" style="min-width: 60%" *ngIf="complete">
     <div class="surface-card w-full lg:w-6 pt-8">
       <div *ngIf="message?.status">
         <div style="text-align: center;" class="mb-3">
@@ -232,6 +268,6 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
 </div>

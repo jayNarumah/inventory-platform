@@ -3,7 +3,7 @@ import { AuthService } from './auth.service';
 import { AdminAuthGuard } from './auth.guard';
 import { AuthLoginRequestDto } from '@inventory-platform/api-interfaces';
 
-@Controller('/admin/auth')
+@Controller('/auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) { }
 

@@ -1,10 +1,9 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { UidService } from '../../util/uid/uid.service';
 import { BcryptService } from '../../util/bcrypt/bcrypt.service';
-import { AuthLoginRequestDto, AuthLoginResponseDto } from '@inventory-platform/api-interfaces';
+import { AuthLoginRequestDto, AuthLoginResponseDto, E_UserType } from '@inventory-platform/api-interfaces';
 import { UserRepository } from '../../database/repositories/user.repository';
 import { UserAccessTokenRepository } from '../../database/repositories/user-access-token.respository';
-
 @Injectable()
 export class AuthService {
   constructor(
@@ -16,7 +15,7 @@ export class AuthService {
 
   async login(request: AuthLoginRequestDto): Promise<AuthLoginResponseDto> {
 
-    const user = await this.userRepository.findByEmail(request.username);
+    const user = await this.userRepository.findByEmail(request.email);
     if (
       user == null ||
       !(await this.bcryptService.comparePasswords(
@@ -36,6 +35,7 @@ export class AuthService {
         full_name: user.full_name,
         email_address: user.email_address,
       },
+      user_type: E_UserType.USER,
     };
 
     return response;

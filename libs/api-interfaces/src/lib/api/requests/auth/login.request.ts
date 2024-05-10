@@ -1,7 +1,8 @@
 import { ArrayMinSize, IsArray, IsBoolean, IsEmail, IsNotEmpty, IsString, MinLength } from "class-validator";
+import { E_UserType } from "../common";
 export class AuthLoginRequestDto {
   // @IsNotEmpty()
-  username!: string;
+  email!: string;
 
   // @IsNotEmpty()
   // @MinLength(8)
@@ -9,6 +10,7 @@ export class AuthLoginRequestDto {
 }
 
 export interface AuthLoginResponseDto {
+  user_type: E_UserType;
   access_token: string;
   // must_change_password: boolean;
   user: AuthLoggedInUserDto;

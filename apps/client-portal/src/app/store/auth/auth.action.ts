@@ -1,5 +1,5 @@
 
-import { E_UserType } from '@inventory-platform/api-interfaces';
+import { AuthLoggedInUserDto, E_UserType } from '@inventory-platform/api-interfaces';
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 
 export const AppAuthActions = createActionGroup({
@@ -8,7 +8,7 @@ export const AppAuthActions = createActionGroup({
     login: props<{
       user_type: E_UserType;
       access_token: string;
-      user: any,
+      user: AuthLoggedInUserDto,
     }>(),
     logout: emptyProps(),
   },
