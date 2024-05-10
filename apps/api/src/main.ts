@@ -37,7 +37,7 @@ async function bootstrap() {
   // Set Global Pipes
   app.useGlobalPipes(
     new ValidationPipe({
-      whitelist: true,
+      // whitelist: true,
       transform: true,
       // forbidNonWhitelisted: true,
       transformOptions: {

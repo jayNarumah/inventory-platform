@@ -14,7 +14,6 @@ export class AuthService {
   ) { }
 
   async login(request: AuthLoginRequestDto): Promise<AuthLoginResponseDto> {
-
     const user = await this.userRepository.findByEmail(request.email);
     if (
       user == null ||
