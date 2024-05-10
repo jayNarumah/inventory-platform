@@ -21,58 +21,7 @@ export interface AuthLoggedInUserDto {
   email_address: string;
 }
 
-// User Roles
 
-export class CreateMdaUserSecurityGroupDto {
-  // @IsNotEmpty()
-  // @MinLength(3)
-  name!: string;
-}
-
-export class UpdateMdaUserSecurityGroupDto {
-  // @IsNotEmpty()
-  // @MinLength(3)
-  name!: string;
-}
-
-export class SetPermissionsOnMdaUserSecurityGroupDto {
-  // @IsArray()
-  // @ArrayMinSize(1)
-  // @IsNotEmpty({ each: true })
-  permission_uids!: string[];
-}
-
-export class ResetPasswordDto {
-  // @IsNotEmpty()
-  // @IsString()
-  uid?: string
-}
-
-export class UpdateMdaUserActivationStatusDto {
-  // @IsNotEmpty()
-  // @IsString()
-  user_uid!: string
-
-  // @IsBoolean()
-  // @IsNotEmpty()
-  is_active!: boolean
-}
-
-export class AssignMdaUserToUserOrganisationUnitDto {
-  // @IsNotEmpty()
-  organisation_unit_uid!: string;
-
-  // @IsNotEmpty()
-  user_uid!: string;
-}
-
-export class RemoveMdaUserFromUserOrganisationUnitDto {
-  // @IsNotEmpty()
-  organisation_unit_uid!: string;
-
-  // @IsNotEmpty()
-  user_uid!: string;
-}
 
 export class UpdatePasswordDto {
   // @IsNotEmpty()
