@@ -11,11 +11,11 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Message } from 'primeng/api';
-import { AppLayoutService } from '../../../layout/services/app-layout.service';
 import { AuthService } from '../../services/auth.service';
 import { AppNotificationService } from '../../../../store/services/app-notification.service';
 import { AppLoadingService } from '../../../../store/services/app-loading.service';
 import { E_UserType } from '@inventory-platform/api-interfaces';
+import { LayoutService } from '../../../layout/service/app.layout.service';
 
 @Component({
   selector: 'inventory-platform-budgeting-login-page',
@@ -30,7 +30,7 @@ export class LoginPageComponent implements OnInit {
   constructor(
     private readonly authService: AuthService,
     private readonly fb: FormBuilder,
-    public readonly layoutService: AppLayoutService,
+    public readonly layoutService: LayoutService,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
     private readonly appNotificationService: AppNotificationService,
@@ -89,7 +89,7 @@ export class LoginPageComponent implements OnInit {
           this.router.navigate(['/module/client/coming-soon']);
         }
         console.log('data', data.user.email_address);
-        
+
       },
       error: (error) => {
         this.appLoadingService.stopLoading();

@@ -1,14 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AppLayoutService } from '../../services/app-layout.service';
-import { AppState } from 'apps/client-portal/src/app/store/app.state';
-import { AuthService } from '../../../auth/services/auth.service';
-import { AppAuthActions } from 'apps/client-portal/src/app/store/auth/auth.action';
+import { LayoutService } from '../service/app.layout.service';
+import { AuthService } from '../../auth/services/auth.service';
 
 @Component({
   selector: 'app-menu',
-  templateUrl: './app-menu.component.html',
-  styleUrls: ['./app-menu.component.scss'],
+  templateUrl: './app.menu.component.html',
 })
 export class AppMenuComponent implements OnInit {
   model: any[] = [];
@@ -18,7 +15,7 @@ export class AppMenuComponent implements OnInit {
   isClientMda = false;
 
   constructor(
-    public layoutService: AppLayoutService,
+    public layoutService: LayoutService,
     // private readonly appStore: Store<AppState>,
     private readonly router: Router,
     private readonly authService: AuthService

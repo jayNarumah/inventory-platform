@@ -4,7 +4,7 @@ import { AdminAuthGuard } from "../../auth/auth.guard";
 import { CreateUserDto, UpdateUserDto } from "libs/api-interfaces/src/lib/dtos/user";
 
 @UseGuards(AdminAuthGuard)
-@Controller('/admin/user')
+@Controller('/user')
 export class UserController {
   constructor(private readonly userService: UserService) { }
 

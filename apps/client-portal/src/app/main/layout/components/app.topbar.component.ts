@@ -1,26 +1,21 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { LayoutService } from "../service/app.layout.service";
 import { Store } from '@ngrx/store';
-import { AppLayoutService } from '../../services/app-layout.service';
-import { AppLoadingService } from 'apps/client-portal/src/app/store/services/app-loading.service';
-import { AuthService } from '../../../auth/services/auth.service';
-import { AppState } from 'apps/client-portal/src/app/store/app.state';
-import { AppAuthActions } from 'apps/client-portal/src/app/store/auth/auth.action';
+import { AuthService } from '../../auth/services/auth.service';
+import { Router } from '@angular/router';
+import { AppState } from '../../../store/app.state';
+import { AppAuthActions } from '../../../store/auth/auth.action';
 
 @Component({
-  selector: 'app-top-bar',
-  templateUrl: './app-top-bar.component.html',
-  styleUrls: ['./app-top-bar.component.scss'],
+  selector: 'app-topbar',
+  templateUrl: './app.topbar.component.html',
+  styleUrl: './app.topbar.component.scss'
 })
-export class AppTopBarComponent implements OnInit {
+export class AppTopBarComponent {
   items!: MenuItem[];
   notificationItems!: MenuItem[];
   selectedNotification!: MenuItem;
-
-  isClientBudgeting: boolean = false;
-  isClientBureau: boolean = false;
-  isClientMda: boolean = false;
 
   user = this.authService.user;
 
@@ -31,25 +26,25 @@ export class AppTopBarComponent implements OnInit {
   @ViewChild('topbarmenu') menu!: ElementRef;
 
   constructor(
-    public layoutService: AppLayoutService,
+    public layoutService: LayoutService,
     private readonly appStore: Store<AppState>,
     private readonly router: Router,
     private readonly authService: AuthService,
-    private readonly appLoadingService: AppLoadingService
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.notificationItems = [
       {
-        label: 'Notification 1',
+        label: 'MLAILPKC-001 Lecture is to be started today by 2:30pm',
         routerLink: '/notification/notifications',
       },
       {
-        label: 'Notification 2',
+        label: 'You have MLAILPKC-002 exam today by 12:30a.m',
         routerLink: '/notification/notifications',
       },
       {
-        label: 'Notification 3',
+        label: 'MLAILPKC-005 Lecture is to be started today by 2:30pm',
         routerLink: '/notification/notifications',
       },
     ];
@@ -61,6 +56,7 @@ export class AppTopBarComponent implements OnInit {
           {
             label: 'My Profile',
             icon: 'pi pi-user',
+            visible: true,
             command: () => {
               this.goToProfile();
             },
@@ -87,25 +83,15 @@ export class AppTopBarComponent implements OnInit {
 
   logout() {
     this.appStore.dispatch(AppAuthActions.logout())
-    this.router.navigate(['/auth/login']);
+    this.router.navigate(['/auth/budgeting/login']);
   }
 
 
   onNotificationSelect(event: any) {
-    this.router.navigate(['']);
+    // this.router.navigate(['/']);
   }
 
   goToProfile() {
-    let userUid: string;
-
-    // this.authService.user$.subscribe(user => {
-    //   if (user) {
-    //     userUid = user.uid;
-    //   }
-
-    //   this.router.navigate([`/module/bureau/bureau/user/users/profile/${userUid}`]);
-    // });
-
+    this.router.navigate([`/`]);
   }
-
 }
