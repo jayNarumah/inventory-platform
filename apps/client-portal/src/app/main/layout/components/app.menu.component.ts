@@ -9,10 +9,6 @@ import { AuthService } from '../../auth/services/auth.service';
 })
 export class AppMenuComponent implements OnInit {
   model: any[] = [];
-  model2: any[] = [];
-  isClientBudgeting = false;
-  isClientBureau = false;
-  isClientMda = false;
 
   constructor(
     public layoutService: LayoutService,
@@ -31,11 +27,46 @@ export class AppMenuComponent implements OnInit {
             icon: 'assets/images/logos/Icons/dashboard.png',
             height: '25',
             padding: 'pt-2 pl-2',
+            routerLink: ['/module'],
+          },
+          {
+            label: 'Sales',
+            icon: 'assets/images/logos/Icons/sales.png',
+            height: '25',
+            padding: 'pt-2 pl-2',
             routerLink: [''],
           },
           {
-            label: 'User administration',
+            label: 'Category Management',
+            icon: 'assets/images/logos/Icons/category.png',
+            height: '25',
+            padding: 'pt-2 pl-2',
+            routerLink: [''],
+          },
+          {
+            label: 'Inventory Management',
+            icon: 'assets/images/logos/Icons/inventory.png',
+            height: '25',
+            padding: 'pt-2 pl-2',
+            routerLink: [''],
+          },
+          {
+            label: 'User Management',
             icon: 'assets/images/logos/Icons/management.png',
+            height: '25',
+            padding: 'pt-2 pl-2',
+            routerLink: [''],
+          },
+          {
+            label: 'User Administration',
+            icon: 'assets/images/logos/Icons/management.png',
+            height: '25',
+            padding: 'pt-2 pl-2',
+            routerLink: [''],
+          },
+          {
+            label: 'Reports',
+            icon: 'assets/images/logos/Icons/reporting.png',
             height: '25',
             padding: 'pt-2 pl-2',
             routerLink: [''],
@@ -47,38 +78,6 @@ export class AppMenuComponent implements OnInit {
             padding: 'pt-2 pl-2',
             routerLink: [''],
           },
-          {
-            label: 'Vendors',
-            icon: 'assets/images/logos/Icons/excavator.png',
-            height: '25',
-            padding: 'pt-1 pr-3',
-            routerLink: [''],
-          },
-        ],
-      },
-    ];
-
-    this.model2 = [
-      {
-        items: [
-          {
-            label: 'Toggle sidebar',
-            icon: 'assets/images/logos/Icons/menu-2.png',
-            height: '25',
-            padding: 'pt-2',
-            routerLink: ["''"],
-            command: () => {
-              this.togleSidebar();
-            },
-          },
-          {
-            label: 'Logout',
-            icon: 'assets/images/logos/Icons/exit.png',
-            height: '25',
-            padding: 'pt-2',
-            routerLink: ['/auth/login'],
-          },
-
         ],
       },
     ];
@@ -86,7 +85,7 @@ export class AppMenuComponent implements OnInit {
 
   logout() {
     // this.appStore.dispatch(AppAuthActions.logout());
-    this.router.navigate(['/auth/budgeting/login']);
+    this.router.navigate(['/auth/login']);
   }
 
   togleSidebar() {

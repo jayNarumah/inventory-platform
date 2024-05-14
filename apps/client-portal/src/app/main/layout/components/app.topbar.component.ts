@@ -36,15 +36,15 @@ export class AppTopBarComponent {
   ngOnInit() {
     this.notificationItems = [
       {
-        label: 'MLAILPKC-001 Lecture is to be started today by 2:30pm',
+        label: 'Kosai was successfully sold',
         routerLink: '/notification/notifications',
       },
       {
-        label: 'You have MLAILPKC-002 exam today by 12:30a.m',
+        label: 'Kuli was successfully added',
         routerLink: '/notification/notifications',
       },
       {
-        label: 'MLAILPKC-005 Lecture is to be started today by 2:30pm',
+        label: 'Kosai quantity was successfully update',
         routerLink: '/notification/notifications',
       },
     ];

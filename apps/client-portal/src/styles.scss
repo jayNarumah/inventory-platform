@@ -79,6 +79,7 @@ $gutter: 1rem; //for primeflex grid system
 
 body {
   font-family: 'Montserrat', sans-serif !important;
+  background-color: #dcebdf;
 }
 
 
@@ -306,167 +307,10 @@ body {
 }
 
 
-.logout-menu {
-  margin: 0;
-  padding: 0;
-  // padding-top: 25px;
-  list-style-type: none;
-
-  .layout-root-menuitem {
-    >.layout-menuitem-root-text {
-      font-size: .857rem;
-      text-transform: uppercase;
-      font-weight: 700;
-      // color: var(--surface-a);
-      color: #8a8787;
-      margin: .75rem 0;
-    }
-
-    >a {
-      display: none;
-    }
-  }
-
-  a {
-    user-select: none;
-
-    &.active-menuitem {
-      >.layout-submenu-toggler {
-        transform: rotate(-180deg);
-      }
-    }
-  }
-
-  li.active-menuitem {
-    >a {
-      .layout-submenu-toggler {
-        transform: rotate(-180deg);
-      }
-    }
-  }
-
-  ul {
-    // margin: 0;
-    margin-bottom: 40px;
-    padding: 0;
-    list-style-type: none;
-
-    a {
-      display: flex;
-      align-items: center;
-      position: relative;
-      outline: 0 none;
-      color: #BDBDBD;
-      color: #000000;
-      cursor: pointer;
-      font-weight: 700;
-      font-size: 14px;
-      padding: 1.25rem 0 1.25rem 1rem;
-      word-wrap: break-word;
-      padding: 1.25rem 0 1.25rem 1rem;
-      margin: 0 0 5px 0;
-      border-radius: $borderRadius;
-      transition: background-color $transitionDuration, box-shadow $transitionDuration;
-
-      .layout-menuitem-icon {
-        margin-right: .5rem;
-      }
-
-      .layout-submenu-toggler {
-        font-size: 75%;
-        margin-left: auto;
-        transition: transform $transitionDuration;
-      }
-
-      &.rotated-icon {
-        .layout-menuitem-icon {
-          transform: rotate(90deg);
-        }
-      }
-
-      &.active-route {
-        font-weight: 700;
-        // color: var(--surface-g);
-        // color: #8a8787;
-        color: #E36C3E;
-      }
-
-      &:hover {
-        // background-color: var(--surface-hover);
-        // color: #4A5468;
-        // color: #8a8787;
-        color: #E36C3E;
-      }
-
-      &:focus {
-        @include focused-inset();
-      }
-    }
-
-    ul {
-      overflow: hidden;
-      border-radius: $borderRadius;
-
-      li {
-        a {
-          margin-left: 1rem;
-        }
-
-        li {
-          a {
-            margin-left: 2rem;
-          }
-
-          li {
-            a {
-              margin-left: 2.5rem;
-            }
-
-            li {
-              a {
-                margin-left: 3rem;
-              }
-
-              li {
-                a {
-                  margin-left: 3.5rem;
-                }
-
-                li {
-                  a {
-                    margin-left: 4rem;
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-.logo-container {
-  position: fixed;
-  // top: 0;
-  // left: 0;
-  // right: 0;
-  background-color: #F0F3F9;
-  width: 215px;
-  z-index: 1000;
-  margin-top: -5px;
-  padding-top: 15px;
-  // padding-bottom: 15px;
-}
-
 .layout-menu {
   margin-top: 85px;
   /* Adjust this value to match the height of the logo */
 }
-
-// .white-icon {
-//   filter: brightness(0) invert(1);
-// }
 
 ngx-intl-tel-input input {
   height: 3.2rem;
@@ -481,10 +325,6 @@ ngx-intl-tel-input input {
 ngx-intl-tel-input.ng-invalid.ng-touched input {
   border: 1px solid #c0392b;
 }
-
-// ngx-intl-tel-input input:hover {
-// 	box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.24);
-// }
 
 ngx-intl-tel-input input:focus {
   outline: none !important;
@@ -553,9 +393,6 @@ ngx-intl-tel-input input[disabled] {
 }
 
 .card-flex {
-  // background-color: #f0f0f0;
-  // padding: 20px;
-  // border-radius: 8px;
   display: flex;
   align-items: center;
 }
@@ -605,12 +442,6 @@ ngx-intl-tel-input input[disabled] {
   display: flex;
   flex-wrap: wrap;
 }
-
-/* Importing Bootstrap SCSS file. */
-// @import "../../../node_modules/bootstrap/scss/bootstrap";
-
-/* Importing Datepicker SCSS file. */
-// @import "../../../node_modules/ngx-bootstrap/datepicker/bs-datepicker";
 
 ngx-dropzone {
   width: fit-content;
