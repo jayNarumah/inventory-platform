@@ -81,19 +81,12 @@ export class LoginPageComponent implements OnInit {
 
         // this, (this.msgs = []);
         this.appLoadingService.stopLoading();
-        if (data.user_type === E_UserType.ADMIN) {
-          this.router.navigate(['/module/admin/dashboard']);
-        } else if (data.user_type === E_UserType.USER) {
-          this.router.navigate(['/module/client/dashboard']);
-        } else {
-          this.router.navigate(['/module/client/coming-soon']);
-        }
-        console.log('data', data.user.email_address);
+        this.router.navigate(['/module/admin/dashboard']);
 
       },
       error: (error) => {
         this.appLoadingService.stopLoading();
-        this.displayErrorMessages(error.error.message.message);
+        this.displayErrorMessages(error.message);
       },
     });
   }
