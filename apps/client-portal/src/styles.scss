@@ -623,3 +623,27 @@ ngx-dropzone {
     width: auto;
   }
 }
+
+.gradient-background {
+  background-image: linear-gradient(to bottom right, #16222e, #3a6073);
+  /* Three blue shades */
+  background-position: center;
+  color: #fdfdfd;
+  /* Gradient starts at the center */
+  animation: animateGradient 10s ease-in-out infinite;
+  /* Example animation */
+}
+
+@keyframes animateGradient {
+  0% {
+    background-position: center;
+  }
+
+  50% {
+    background-position: right;
+  }
+
+  100% {
+    background-position: center;
+  }
+}
