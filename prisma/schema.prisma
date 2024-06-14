@@ -21,6 +21,7 @@ model User {
   created_at       DateTime   @default(now())
   last_modified_at DateTime   @updatedAt
   userRole         UserRole[]
+  Payment          Payment[]
 }
 
 model UserAccessToken {
@@ -77,4 +78,132 @@ model RolePermission {
   //relationship
   role       Role       @relation(fields: [role_uid], references: [uid])
   permission Permission @relation(fields: [permission_uid], references: [uid])
+}
+
+model Category {
+  uid String @unique @default(cuid())
+
+  title            String   @db.VarChar(200)
+  description      String   @unique @db.VarChar(300)
+  created_at       DateTime @default(now())
+  last_modified_at DateTime @updatedAt
+
+  CategoryExtra      CategoryExtra[]
+  CategoryExtraValue CategoryExtraValue[]
+  StockItem          StockItem[]
+}
+
+model CategoryExtra {
+  uid String @unique @default(cuid())
+
+  title            String   @db.VarChar(200)
+  data_type        String   @db.VarChar(50)
+  is_required      Boolean  @default(true)
+  created_at       DateTime @default(now())
+  last_modified_at DateTime @updatedAt
+
+  category_uid String
+  //relationships
+
+  catagory           Category             @relation(fields: [category_uid], references: [uid])
+  CategoryExtraValue CategoryExtraValue[]
+}
+
+model CategoryExtraValue {
+  uid String @unique @default(cuid())
+
+  value            String   @db.VarChar(230)
+  created_at       DateTime @default(now())
+  last_modified_at DateTime @updatedAt
+
+  extra_uid String
+  //relationships
+
+  extra       CategoryExtra @relation(fields: [extra_uid], references: [uid])
+  Category    Category?     @relation(fields: [categoryUid], references: [uid])
+  categoryUid String?
+}
+
+model StockItem {
+  uid         String @unique @default(cuid())
+  name        String @db.VarChar(150)
+  quantity    Int
+  unit_price  Int
+  total_price Int?
+
+  suppier_name     String? @db.VarChar(150)
+  supplier_contact String? @db.VarChar(50)
+  supplier_email   String? @db.VarChar(50)
+
+  image_url     String? @db.VarChar(200)
+  item_location String? @db.VarChar(100)
+  barcode       String  @db.Text
+  status        String
+
+  date_acquired    DateTime?
+  expiry_date      DateTime
+  created_at       DateTime  @default(now())
+  last_modified_at DateTime  @updatedAt
+
+  category_uid String
+
+  //relationship
+  category Category  @relation(fields: [category_uid], references: [uid])
+  Payment  Payment[]
+}
+
+model Sale {
+  id               Int        @unique @default(autoincrement())
+  quantity         Int
+  unit_price       Int
+  total_price      Int
+  buyer            String?
+  discount         Int?
+  status           SaleStatus
+  created_at       DateTime   @default(now())
+  last_modified_at DateTime   @updatedAt
+
+  item_uid   String
+  seller_uid String
+}
+
+model Payment {
+  id  Int    @id @unique @default(autoincrement())
+  uid String @unique @default(cuid())
+
+  method       PaymentMethod @default(CASH)
+  payment_date DateTime      @default(now())
+  status       PaymentStatus @default(PENDING)
+
+  sale_uid   String
+  saller_uid String
+
+  sale   StockItem @relation(fields: [sale_uid], references: [uid])
+  saller User      @relation(fields: [saller_uid], references: [uid])
+}
+
+model Refund {
+  id Int @id @unique @default(autoincrement())
+}
+
+//Enums
+
+enum SaleStatus {
+  SOLD
+  REFUND
+  EXPIRED
+  // Add more values as needed
+}
+
+enum PaymentMethod {
+  CASH
+  POS
+  TRANSFER
+}
+
+enum PaymentStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  PARTIAL
 }
