@@ -11,17 +11,22 @@ datasource db {
 }
 
 model User {
-  id               Int        @id @default(autoincrement())
-  uid              String     @unique @default(cuid())
-  full_name        String     @db.VarChar(100)
-  email_address    String     @unique @db.VarChar(200)
-  password         String     @db.VarChar(4096)
-  gender           String     @db.VarChar(30)
-  dob              DateTime   @db.Date()
-  created_at       DateTime   @default(now())
-  last_modified_at DateTime   @updatedAt
-  userRole         UserRole[]
-  Payment          Payment[]
+  id                 Int                  @id @default(autoincrement())
+  uid                String               @unique @default(cuid())
+  full_name          String               @db.VarChar(100)
+  email_address      String               @unique @db.VarChar(200)
+  password           String               @db.VarChar(4096)
+  gender             String               @db.VarChar(30)
+  dob                DateTime             @db.Date()
+  created_at         DateTime             @default(now())
+  last_modified_at   DateTime             @updatedAt
+  userRole           UserRole[]
+  Payment            Payment[]
+  Sale               Sale[]
+  StockItem          StockItem[]
+  CategoryExtraValue CategoryExtraValue[]
+  CategoryExtra      CategoryExtra[]
+  Category           Category[]
 }
 
 model UserAccessToken {
@@ -81,6 +86,7 @@ model RolePermission {
 }
 
 model Category {
+  id  Int    @unique @default(autoincrement())
   uid String @unique @default(cuid())
 
   title            String   @db.VarChar(200)
@@ -88,12 +94,16 @@ model Category {
   created_at       DateTime @default(now())
   last_modified_at DateTime @updatedAt
 
+  user_uid           String
+  //relationships
+  createBy           User                 @relation(fields: [user_uid], references: [uid])
   CategoryExtra      CategoryExtra[]
   CategoryExtraValue CategoryExtraValue[]
   StockItem          StockItem[]
 }
 
 model CategoryExtra {
+  id  Int    @unique @default(autoincrement())
   uid String @unique @default(cuid())
 
   title            String   @db.VarChar(200)
@@ -102,36 +112,41 @@ model CategoryExtra {
   created_at       DateTime @default(now())
   last_modified_at DateTime @updatedAt
 
-  category_uid String
+  category_uid       String
+  user_uid           String
   //relationships
-
+  createBy           User                 @relation(fields: [user_uid], references: [uid])
   catagory           Category             @relation(fields: [category_uid], references: [uid])
   CategoryExtraValue CategoryExtraValue[]
 }
 
 model CategoryExtraValue {
+  id  Int    @unique @default(autoincrement())
   uid String @unique @default(cuid())
 
   value            String   @db.VarChar(230)
   created_at       DateTime @default(now())
   last_modified_at DateTime @updatedAt
 
-  extra_uid String
-  //relationships
+  extra_uid    String
+  user_uid     String
+  category_uid String?
 
-  extra       CategoryExtra @relation(fields: [extra_uid], references: [uid])
-  Category    Category?     @relation(fields: [categoryUid], references: [uid])
-  categoryUid String?
+  //relationships
+  createBy User          @relation(fields: [user_uid], references: [uid])
+  extra    CategoryExtra @relation(fields: [extra_uid], references: [uid])
+  Category Category?     @relation(fields: [category_uid], references: [uid])
 }
 
 model StockItem {
+  id          Int    @unique @default(autoincrement())
   uid         String @unique @default(cuid())
   name        String @db.VarChar(150)
   quantity    Int
   unit_price  Int
   total_price Int?
 
-  suppier_name     String? @db.VarChar(150)
+  supplier_name    String? @db.VarChar(150)
   supplier_contact String? @db.VarChar(50)
   supplier_email   String? @db.VarChar(50)
 
@@ -146,10 +161,13 @@ model StockItem {
   last_modified_at DateTime  @updatedAt
 
   category_uid String
+  user_uid     String
 
   //relationship
   category Category  @relation(fields: [category_uid], references: [uid])
+  createBy User      @relation(fields: [user_uid], references: [uid])
   Payment  Payment[]
+  Sale     Sale[]
 }
 
 model Sale {
@@ -165,6 +183,10 @@ model Sale {
 
   item_uid   String
   seller_uid String
+
+  //relationships
+  saller User      @relation(fields: [seller_uid], references: [uid])
+  item   StockItem @relation(fields: [item_uid], references: [uid])
 }
 
 model Payment {
@@ -177,6 +199,7 @@ model Payment {
 
   sale_uid   String
   saller_uid String
+  user_uid   String
 
   sale   StockItem @relation(fields: [sale_uid], references: [uid])
   saller User      @relation(fields: [saller_uid], references: [uid])
@@ -192,7 +215,6 @@ enum SaleStatus {
   SOLD
   REFUND
   EXPIRED
-  // Add more values as needed
 }
 
 enum PaymentMethod {
