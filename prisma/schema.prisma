@@ -27,6 +27,7 @@ model User {
   CategoryExtraValue CategoryExtraValue[]
   CategoryExtra      CategoryExtra[]
   Category           Category[]
+  Refund             Refund[]
 }
 
 model UserAccessToken {
@@ -172,6 +173,7 @@ model StockItem {
 
 model Sale {
   id               Int        @unique @default(autoincrement())
+  uid              String     @unique @default(cuid())
   quantity         Int
   unit_price       Int
   total_price      Int
@@ -187,15 +189,18 @@ model Sale {
   //relationships
   saller User      @relation(fields: [seller_uid], references: [uid])
   item   StockItem @relation(fields: [item_uid], references: [uid])
+  Refund Refund[]
 }
 
 model Payment {
   id  Int    @id @unique @default(autoincrement())
   uid String @unique @default(cuid())
 
-  method       PaymentMethod @default(CASH)
-  payment_date DateTime      @default(now())
-  status       PaymentStatus @default(PENDING)
+  method           PaymentMethod @default(CASH)
+  payment_date     DateTime      @default(now())
+  status           PaymentStatus @default(PENDING)
+  created_at       DateTime      @default(now())
+  last_modified_at DateTime      @updatedAt
 
   sale_uid   String
   saller_uid String
@@ -206,7 +211,18 @@ model Payment {
 }
 
 model Refund {
-  id Int @id @unique @default(autoincrement())
+  id  Int    @id @unique @default(autoincrement())
+  uid String @unique @default(cuid())
+
+  created_at       DateTime     @default(now())
+  last_modified_at DateTime     @updatedAt
+  reason           String       @db.VarChar(300)
+  status           RefundStatus @default(APPROVED)
+  sale_uid         String
+  created_by       String
+
+  sale      Sale @relation(fields: [sale_uid], references: [uid])
+  createdBy User @relation(fields: [created_by], references: [uid])
 }
 
 //Enums
@@ -215,6 +231,11 @@ enum SaleStatus {
   SOLD
   REFUND
   EXPIRED
+}
+
+enum RefundStatus {
+  APPROVED
+  CANCELED
 }
 
 enum PaymentMethod {
